@@ -15,6 +15,7 @@ class RoomResource extends JsonResource
     public function toArray($request)
     {
         return [
+            'hash' => $this->hash,
             'name' => $this->name,
             'host' => new UserResource($this->host),
             'is_public' => $this->is_public,

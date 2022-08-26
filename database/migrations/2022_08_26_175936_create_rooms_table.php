@@ -15,6 +15,7 @@ class CreateRoomsTable extends Migration
     {
         Schema::create('rooms', function (Blueprint $table) {
             $table->id();
+            $table->string('hash')->unique();
             $table->unsignedBigInteger('host_id');
             $table->string('name');
             $table->string('password')->nullable(); // for public that's null

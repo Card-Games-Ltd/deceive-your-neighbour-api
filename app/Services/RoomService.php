@@ -3,12 +3,14 @@
 namespace App\Services;
 
 use App\Models\Room;
+use Illuminate\Support\Str;
 
 class RoomService
 {
     public function createRoom($host, $attributes)
     {
         $data = [
+            'hash' => uniqid(Str::random()),
             'host_id' => $host->id,
             'name' => $attributes['name'],
             'is_public' => $attributes['is_public'],
