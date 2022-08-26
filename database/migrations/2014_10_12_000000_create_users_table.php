@@ -16,11 +16,13 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('email')->unique();
+            $table->string('avatar_url')->nullable();
+            $table->string('email')->nullable();
+            $table->string('password')->nullable();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
-            $table->timestamps();
+            $table->string('session_token')->nullable(); // for first time without email & password
+            $table->timestamp('session_token_expires_at')->nullable();
+            $table->timestamps(); // if created_at > session_token_expires_at --> delete user
         });
     }
 
