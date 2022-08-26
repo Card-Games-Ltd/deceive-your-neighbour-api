@@ -16,7 +16,7 @@ class UserResource extends JsonResource
     {
         return [
             'name' => $this->name,
-            'avatar' => $this->getMedia('avatar')->first()->getUrl(),
+            'avatar' => optional($this->getMedia('avatar')->first())->getUrl(),
             'session_token' => $this->session_token,
             'session_token_expires_at' => $this->session_token_expires_at,
             'email' => $this->email,
