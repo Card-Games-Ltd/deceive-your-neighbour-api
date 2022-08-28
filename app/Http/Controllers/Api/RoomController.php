@@ -7,6 +7,8 @@ use App\Http\Requests\Room\CreateRoomRequest;
 use App\Http\Resources\RoomResource;
 use App\Services\RoomService;
 use App\Services\UserService;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class RoomController extends Controller
 {
@@ -19,6 +21,11 @@ class RoomController extends Controller
         $this->roomService = $roomService;
     }
 
+    public function index(): \Illuminate\Http\JsonResponse
+    {
+        return response()->json(RoomResource::collection($this->roomService->getRooms()));
+    }
+
     public function store(CreateRoomRequest $request): \Illuminate\Http\JsonResponse
     {
         $attributes = $request->validated();
@@ -26,5 +33,14 @@ class RoomController extends Controller
         unset($attributes['session_token']);
         $room = $this->roomService->createRoom($host, $attributes);
         return response()->json(new RoomResource($room));
+    }
+
+    public function show(Request $request, string $id): \Illuminate\Http\JsonResponse
+    {
+        $room = $this->roomService->getRoom($id);
+        if ($this->roomService->checkRoomCredentials($room, $request->get('password'))) {
+            return response()->json(new RoomResource($room));
+        }
+        return response()->json(['error' => 'Wrong credentials for the room.'], Response::HTTP_FORBIDDEN);
     }
 }

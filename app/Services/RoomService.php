@@ -24,16 +24,22 @@ class RoomService
 
     public function getRooms()
     {
-        // ...
+        return Room::query()->orderByDesc('created_at')->get();
     }
 
     public function getRoom(string $id)
     {
-        // ...
+        return Room::query()->where(['hash' => $id])->first();
+    }
+
+    public function checkRoomCredentials($room, string $password = null): bool
+    {
+        return $room->is_public || $room->password === $password;
     }
 
     public function removeRoom(string $id)
     {
-        // ...
+        $room = Room::query()->where(['hash' => $id])->first();
+        return $room->delete();
     }
 }

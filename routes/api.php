@@ -16,5 +16,5 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::resource('users', UserController::class)->only(['store', 'show']);
-Route::resource('rooms', RoomController::class)->only(['store']);
+Route::resource('rooms', RoomController::class)->only(['index', 'store', 'show']);
 
