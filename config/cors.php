@@ -15,15 +15,15 @@ return [
     |
     */
 
-    'paths' => ['api/*', '*'],
+    'paths' => ['api/*'],
 
-    'allowed_methods' => ['POST', 'GET', 'DELETE', 'PUT', '*'],
+    'allowed_methods' => ['*'],
 
-    'allowed_origins' => [env('FRONTEND_ORIGIN'), env('LOCALHOST_ORIGIN'), '*'],
+    'allowed_origins' => ['*'],
 
     'allowed_origins_patterns' => [],
 
-    'allowed_headers' => ['X-Custom-Header', 'Upgrade-Insecure-Requests', '*'],
+    'allowed_headers' => ['*'],
 
     'exposed_headers' => [],
 
