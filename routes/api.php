@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\RoomController;
 use Illuminate\Support\Facades\Route;
 
+header("Access-Control-Allow-Origin: *"); // for development purposes
 /*
 |--------------------------------------------------------------------------
 | API Routes
