@@ -6,7 +6,7 @@ use App\Models\Relationships\BelongsToManyCards;
 use App\Models\Relationships\BelongsToRoom;
 use App\Models\Relationships\HasManyActions;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Query\Builder;
+use Illuminate\Database\Eloquent\Builder;
 
 class Game extends BaseModel
 {
