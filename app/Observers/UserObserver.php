@@ -11,7 +11,7 @@ class UserObserver
     public function created(User $user)
     {
         if (!$user->email) {
-            $user->forceFill([
+            $user->update([
                 'session_token' => uniqid(Str::random()),
                 'session_token_expires_at' => Carbon::now()->addDays(User::EXPIRES_IN_DAYS)->toDateTimeString(),
             ]);
