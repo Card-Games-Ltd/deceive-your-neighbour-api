@@ -37,6 +37,14 @@ class RoomService
         return $room->is_public || $room->password === $password;
     }
 
+    public function addPlayer($room, $player)
+    {
+        $players = $room->users->pluck('id');
+        $players->add($player->id);
+        $room->users()->sync($players->toArray());
+        return $room;
+    }
+
     public function removeRoom(string $id)
     {
         $room = Room::query()->where(['hash' => $id])->first();

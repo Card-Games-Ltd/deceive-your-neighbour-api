@@ -39,7 +39,13 @@ class RoomController extends Controller
     {
         $room = $this->roomService->getRoom($id);
         if ($this->roomService->checkRoomCredentials($room, $request->get('password'))) {
-            return response()->json(new RoomResource($room));
+            $player = $this->userService->getUser($request->get('session_token'));
+            if ($player) {
+                $this->roomService->addPlayer($room, $player);
+                return response()->json(new RoomResource($room));
+            } else {
+                return response()->json(['error' => 'You are blocked.'], Response::HTTP_UNAUTHORIZED);
+            }
         }
         return response()->json(['error' => 'Wrong credentials for the room.'], Response::HTTP_FORBIDDEN);
     }

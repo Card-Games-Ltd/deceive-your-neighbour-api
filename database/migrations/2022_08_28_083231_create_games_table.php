@@ -15,6 +15,7 @@ class CreateGamesTable extends Migration
     {
         Schema::create('games', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('room_id');
             $table->boolean('is_active')->default(true);
             $table->unsignedBigInteger('current_executor_id')->nullable();
             $table->unsignedBigInteger('previous_executor_id')->nullable();
