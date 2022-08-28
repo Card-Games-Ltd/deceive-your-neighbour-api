@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\RoomController;
+use App\Http\Controllers\Api\GameController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,4 +18,5 @@ use Illuminate\Support\Facades\Route;
 
 Route::resource('users', UserController::class)->only(['store', 'show']);
 Route::resource('rooms', RoomController::class)->only(['index', 'store', 'show']);
+Route::resource('rooms/{roomId}/games', GameController::class)->only(['index', 'store']);
 

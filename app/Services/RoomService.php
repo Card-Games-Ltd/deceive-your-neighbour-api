@@ -37,6 +37,11 @@ class RoomService
         return $room->is_public || $room->password === $password;
     }
 
+    public function getPlayers($room)
+    {
+        return $room->users;
+    }
+
     public function addPlayer($room, $player)
     {
         $players = $room->users->pluck('id');
