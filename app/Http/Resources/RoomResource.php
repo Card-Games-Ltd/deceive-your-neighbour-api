@@ -20,6 +20,7 @@ class RoomResource extends JsonResource
             'host' => new UserResource($this->host),
             'is_public' => $this->is_public,
             'players_number' => $this->players_number,
+            'active_players_number' => rand(1, 3), // test
         ];
     }
 }
