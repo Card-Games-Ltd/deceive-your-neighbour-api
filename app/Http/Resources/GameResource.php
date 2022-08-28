@@ -21,6 +21,7 @@ class GameResource extends JsonResource
             'previous_executor' => new UserResource($this->previousExecutor),
             'current_action' => new ActionResource($this->currentAction),
             'actions' => ActionResource::collection($this->actions()->with(['actionType'])->get()),
+            'cards' => CardResource::collection($this->cards),
         ];
     }
 }

@@ -26,14 +26,10 @@ class GameController extends Controller
         return response()->json(new GameResource($game));
     }
 
-    public function store(Request $request, $roomId): \Illuminate\Http\JsonResponse
+    public function store($roomId): \Illuminate\Http\JsonResponse
     {
         $room = $this->roomService->getRoom($roomId);
         $game = $this->gameService->createGame($room);
-        $players = $this->roomService->getPlayers($room);
-        foreach ($players as $player) {
-            $this->gameService->addPlayerToGame($game, $player);
-        }
         return response()->json(new GameResource($game));
     }
 }

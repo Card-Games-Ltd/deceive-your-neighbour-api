@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Relationships\BelongsToManyCards;
 use App\Models\Relationships\BelongsToRoom;
 use App\Models\Relationships\HasManyActions;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -10,7 +11,7 @@ use Illuminate\Database\Query\Builder;
 class Game extends BaseModel
 {
     use HasFactory;
-    use BelongsToRoom, HasManyActions;
+    use BelongsToRoom, HasManyActions, BelongsToManyCards;
 
     public function users(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
