@@ -16,6 +16,7 @@ class GameResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            'name' => $this->room->name,
             'is_active' => $this->is_active,
             'current_executor' => new UserResource($this->currentExecutor),
             'previous_executor' => new UserResource($this->previousExecutor),
