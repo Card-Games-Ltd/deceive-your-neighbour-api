@@ -5,7 +5,6 @@ namespace App\Services;
 use App\Models\Card;
 use App\Models\Game;
 use App\Models\Room;
-use Illuminate\Support\Str;
 
 class GameService
 {
@@ -16,12 +15,13 @@ class GameService
         foreach ($players as $player) {
             $this->addPlayerToGame($game, $player);
         }
-        $this->generateCards($game);
+        $this->generateCards($game, $players);
         return $game;
     }
 
-    public function generateCards($game)
+    public function generateCards($game, $players)
     {
+        $playerIds = $players->pluck('id')->toArray();
         $cards = Card::all()->pluck('id')->toArray();
         $cardsNumber = count($cards);
         for ($i = $cardsNumber - 1; $i > 0; $i--) {
@@ -32,8 +32,10 @@ class GameService
         }
         $cardsWithPivot = [];
         foreach ($cards as $position => $cardId) {
+            $userId = $playerIds[$position % count($playerIds)];
             $cardsWithPivot[$cardId] = [
-                'position' => $position
+                'position' => $position,
+                'user_id' => $userId,
             ];
         }
         $game->cards()->sync($cardsWithPivot);
