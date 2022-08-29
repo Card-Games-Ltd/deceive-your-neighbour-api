@@ -12,9 +12,7 @@ class GameService
     {
         $game = Game::query()->create(['room_id' => $room->id]);
         $players = $room->users;
-        foreach ($players as $player) {
-            $this->addPlayerToGame($game, $player);
-        }
+        $this->addPlayersToGame($game, $players);
         $this->generateCards($game, $players);
         return $game;
     }
@@ -50,6 +48,13 @@ class GameService
     {
         $players = $game->users->pluck('id');
         $players->add($player->id);
+        $game->users()->sync($players->toArray());
+        return $game;
+    }
+
+    public function addPlayersToGame($game, $players)
+    {
+        $players = $players->pluck('id');
         $game->users()->sync($players->toArray());
         return $game;
     }
