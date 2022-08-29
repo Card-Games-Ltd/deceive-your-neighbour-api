@@ -19,7 +19,7 @@ class RoomResource extends JsonResource
             'name' => $this->name,
             'host' => new UserResource($this->host),
             'is_public' => $this->is_public,
-            'players_number' => $this->players_number,
+            'players_number' => (int) $this->players_number,
             'active_players_number' => $this->users()->count(),
             'players' => UserResource::collection($this->users),
             'game' => new GameResource($this->games()->active()->first())
